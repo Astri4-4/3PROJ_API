@@ -1,13 +1,19 @@
+import chalk from "chalk";
 import jwt from "jsonwebtoken";
 
 class Socket {
 
-    constructor(socket) {
+    constructor(io, socket) {
+        this.io = io;
         this.socket = socket;
+        this.room = 0;
         this.listener();
     }
 
     listener() {
+        this.socket.on("joinRoom", (roomId) => {
+            this.joinRoom(roomId)
+        })
         this.socket.on("private_message", (data) => {
             this.private_message(data);
         })
@@ -22,6 +28,12 @@ class Socket {
         }
     }
 
+    joinRoom(roomId) {
+        this.socket.join(roomId);
+        this.room = roomId;
+        console.log(chalk.blue("Socket joined room " + roomId));
+    }
+
     private_message(data) {
 
         data = JSON.parse(data);
@@ -29,19 +41,10 @@ class Socket {
         const isTokenValid = this.checkJWT(data.token);
 
         if (isTokenValid != false) {
-            const userInfo = isTokenValid;
+            const receiverId = data.receiver;
+            const userId = isTokenValid.id;
+            this.io.to(this.room).emit('message', data.content);
 
-            let socketEvent = "";
-
-            if (userInfo.id < data.receiver) {
-                socketEvent = "mp_" + userInfo.id + "_" + data.receiver;
-            } else {
-                socketEvent = "mp_" + data.receiver + "_" + userInfo.id;
-            }
-
-            //TODO Ajouter le message a la base de donnée
-
-            this.socket.emit(socketEvent, data.content);
 
         } else {
             console.log("Invalid Token")

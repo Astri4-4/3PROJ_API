@@ -40,7 +40,7 @@ const socket_port = process.env.SOCKET_PORT;
 io.on("connection", (socket) => {
     console.log("CONNECTED");
 
-    const socketHandler = new Socket(socket);
+    const socketHandler = new Socket(io, socket);
 
 })
 
