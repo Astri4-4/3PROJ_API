@@ -35,14 +35,11 @@ class Socket {
     }
 
     private_message(data) {
-
-        data = JSON.parse(data);
+        console.log(data)
 
         const isTokenValid = this.checkJWT(data.token);
 
         if (isTokenValid != false) {
-            const receiverId = data.receiver;
-            const userId = isTokenValid.id;
             this.io.to(this.room).emit('message', data.content);
 
 

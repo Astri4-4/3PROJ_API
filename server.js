@@ -31,7 +31,7 @@ app.use("/public", FileRoutes);
 // WEBSOCKET
 const io = new Server({
     cors: {
-        origin: "0.0.0.0"
+        origin: "*"
     }
 })
 
