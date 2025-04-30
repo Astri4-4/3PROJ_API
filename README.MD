@@ -27,15 +27,17 @@ __POST__
 Payload :
 
 ```JSON
-headers: {
-    "Content-Type": "multipart/form-data",
-    // Pas besoin de token
-},
-body: {
-    "email": "test@test.xyz",
-    "username": "JohnDoe",
-    "password": "changeme",
-    "profile_pic": file
+{
+    headers: {
+        "Content-Type": "multipart/form-data",
+        // Pas besoin de token
+    },
+    body: {
+        "email": "test@test.xyz",
+        "username": "JohnDoe",
+        "password": "changeme",
+        "profile_pic": file
+    }
 }
 ```
 
@@ -49,13 +51,15 @@ __POST__ ```/users/login```
 
 Payload:
 ```JSON
-headers: {
-    "Content-Type": "application/json"
-    // Pas besoin de token
-},
-body: {
-    "email": "test@test.xyz",
-    "password": "changeme"
+{
+    headers: {
+        "Content-Type": "application/json"
+        // Pas besoin de token
+    },
+    body: {
+        "email": "test@test.xyz",
+        "password": "changeme"
+    }
 }
 ```
 
@@ -81,8 +85,10 @@ __GET__ ```/users/:id```
 
 Payload :
 ```JSON
-headers: {
-    "Authorization": "Bearer your_token"
+{
+    headers: {
+        "Authorization": "Bearer your_token"
+    }
 }
 ```
 
@@ -103,8 +109,10 @@ __GET__ ```/users/:id/workspaces```
 
 Payload:
 ```JSON
-headers: {
-    "Authorization": "Bearer your_token"
+{
+    headers: {
+        "Authorization": "Bearer your_token"
+    }
 }
 ```
 
@@ -129,8 +137,10 @@ __GET__ ```/users/:id/profile_picture```
 
 Payload :
 ```JSON
-headers: {
-    "Authorization": "Bearer your_token"
+{
+    headers: {
+        "Authorization": "Bearer your_token"
+    }
 }
 ```
 
