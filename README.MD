@@ -28,11 +28,11 @@ Payload :
 
 ```JSON
 {
-    headers: {
+    "headers": {
         "Content-Type": "multipart/form-data",
         // Pas besoin de token
     },
-    body: {
+    "body": {
         "email": "test@test.xyz",
         "username": "JohnDoe",
         "password": "changeme",
@@ -52,11 +52,11 @@ __POST__ ```/users/login```
 Payload:
 ```JSON
 {
-    headers: {
+    "headers": {
         "Content-Type": "application/json"
         // Pas besoin de token
     },
-    body: {
+    "body": {
         "email": "test@test.xyz",
         "password": "changeme"
     }
@@ -86,7 +86,7 @@ __GET__ ```/users/:id```
 Payload :
 ```JSON
 {
-    headers: {
+    "headers": {
         "Authorization": "Bearer your_token"
     }
 }
@@ -110,7 +110,7 @@ __GET__ ```/users/:id/workspaces```
 Payload:
 ```JSON
 {
-    headers: {
+    "headers": {
         "Authorization": "Bearer your_token"
     }
 }
@@ -138,7 +138,7 @@ __GET__ ```/users/:id/profile_picture```
 Payload :
 ```JSON
 {
-    headers: {
+    "headers": {
         "Authorization": "Bearer your_token"
     }
 }
