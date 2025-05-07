@@ -1,7 +1,12 @@
 import {param} from "express-validator";
+import fs from "node:fs";
 
-const validator = {
+const file = {
     filename: param("filename").notEmpty().trim()
 }
 
-export default validator;
+function doExist(req, res, next) {
+    
+}
+
+export default {file};

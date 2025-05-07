@@ -37,6 +37,10 @@ function doExistWanted(req, res, next) {
     }
 }
 
+doEmailUsedWanted(req, res , next) {
+    const id = req.params["id"];
+}
+
 function doExistUnwanted(req, res, next) {
     //TODO Voir si l'utilisateur existe par on id
     const user = {}
