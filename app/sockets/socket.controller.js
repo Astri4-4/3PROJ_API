@@ -35,8 +35,7 @@ class Socket {
     }
 
     private_message(data) {
-
-        data = JSON.parse(data);
+        console.log(data)
 
         const isTokenValid = this.checkJWT(data.token);
 
