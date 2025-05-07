@@ -43,6 +43,7 @@ class Socket {
         if (isTokenValid != false) {
             const receiverId = data.receiver;
             const userId = isTokenValid.id;
+            this.saveMessage(data)
             this.io.to(this.room).emit('message', data.content);
 
 

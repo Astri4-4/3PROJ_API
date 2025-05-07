@@ -1,0 +1,11 @@
+[
+    "WriteMessage",
+    "ReadMessage",
+    "WritePermission",
+    "ExcludeUser",
+    "InvitePeople",
+    "ManageChannel",
+    "ManageWorkspace",
+    "DeleteChannel",
+    "DeleteWorkspace"
+]
