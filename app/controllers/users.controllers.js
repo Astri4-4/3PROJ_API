@@ -1,8 +1,9 @@
 import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken"
 
 class User {
 
-    async register(email, username, password) {
+    async register(email, username, password, telephone) {
         const hashPassword = bcrypt.hashSync(password, 10);
 
         const user = {
@@ -28,16 +29,14 @@ class User {
         }
 
         const verification = bcrypt.compareSync(password, user.password);
-
         if (verification == true) {
             const payload = {
                 id: 1,
-                username: username,
+                email: email,
                 role: user.role
             };
             //FIXME Ajouter une limite au Token
             const token = jwt.sign(payload, process.env.JWT_TOKEN_SECRET)
-
             return token
 
         } else {

@@ -4,6 +4,16 @@ import errorMiddleware from "../middlewares/error.middlewares.js";
 
 const router = Router();
 
+/**
+ * @swagger
+ * /workspace/:id:
+ *  get:
+ *      summary: Returns a workspace based on it's ID
+ *      tags: [Workspaces]
+ *      responses:
+ *          200:
+ *              description: [workspace]
+ */
 router.get("/:id", [workspace.id, errorMiddleware.validator], (req, res) => {
     const workspace = {
         "wsname": "TaskFlow",

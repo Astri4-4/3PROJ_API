@@ -1,0 +1,283 @@
+openapi: 3.0.0
+info:
+  title: Supchat
+  version: 1.0.0
+  description: Supchat API documentation
+servers:
+  - url: http://localhost:3000
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+security:
+  - bearerAuth: []
+
+paths:
+# USERS
+  /users/register:
+    post:
+      summary: register a new user
+      tags: [Users]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - username
+                - password
+                - telephone
+              properties:
+                email:
+                  type: string
+                username:
+                  type: string
+                password:
+                  type: string
+                telephone:
+                  type: string
+      responses:
+        200:
+          description: User created
+        400:
+          description: Email already used
+        500:
+          description: Server error
+
+  /users/login:
+    post:
+      summary: log a user and return the token
+      tags: [Users]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - email
+                - password
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        200:
+          description: Return the JWT token
+        400:
+          description: One or more information are incorrect
+        401:
+          description: Invalid credentials
+        500:
+          description: Server error
+
+  /users/{id}:
+    get:
+      summary: Return a user based on it's ID
+      tags: [Users]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The user ID
+      responses:
+        200:
+          description: Return a User
+        400:
+          description: One or more information are incorrect
+        401:
+          description: No token provided
+        500:
+          description: Server error
+    put:
+      summary: Update the user
+      tags: [Users]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The user ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:  
+                  type: string
+                username:
+                  type: string
+                password:
+                  type: string
+                telephone:
+                  type: string
+      responses:
+        200:
+          description: User updated
+        400:
+          description: One or more information are incorrect
+        401:
+          description: No token provided
+        500:
+          description: Server error
+  
+  /users/{id}/workspaces:
+    get:
+      summary: Return all the workspaces a user is in
+      tags: [Users]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The user ID
+      responses:
+        200:
+          description: Return workspaces
+        400:
+          description: One or more information are incorrect
+        401:
+          description: No token provided
+        500:
+          description: Server error
+  
+  /users/{id}/profile_picture:
+    get:
+      summary: Return the link to the user profile picture
+      tags: [Users]
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The user ID
+      responses:
+        200:
+          description: Return a link to the profile picture
+        400:
+          description: One or more information are incorrect
+        401:
+          description: No token provided
+        500:
+          description: Server error
+    
+
+#PRIVATE MESSAGES
+  /private/{receiver_id}:
+    get:
+      summary: Returns chat between connected user and the receiver
+      tags: [Private messages]
+      parameters:
+        - name: receiver_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The receiver ID
+      responses:
+        200:
+          description: Returns messages
+        400:
+          description: One or more information are incorrect
+        401:
+          description: Invalid token
+        404:
+          description: Chat not found
+        500:
+          description: Server error
+    post:
+      summary: Add a message in the database
+      tags: [Private messages]
+      parameters:
+        - name: receiver_id
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The receiver ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                content:
+                  type: string
+                file:
+                  type: string
+      responses:
+        200:
+          description: Message sended
+        400:
+          description: One or more information are incorrect
+        401:
+          description: Invalid token
+        404:
+          description: Chat not found
+        500:
+          description: Server error
+
+#FILES
+  /public/profile/{filename}:
+    get:
+      summary: Return the profile picture
+      tags: [Files]
+      parameters:
+        - name: filename
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The file name
+      responses:
+        200:
+          description: Image
+        400:
+          description: One or more information are incorrect
+        401:
+          description: Invalid token
+        404:
+          description: File not found
+        500:
+          description: Server error
+  
+  /public/attachment/{filename}:
+    get:
+      summary: Return the attachment
+      tags: [Files]
+      parameters:
+        - name: file name
+          in: path
+          required: true
+          schema:
+            type: string
+          description: The file name
+      responses:
+        200:
+          description: File
+        400:
+          description: One or more information are incorrect
+        401:
+          description: Invalid token
+        404:
+          description: File not found
+        500:
+          description: Server error
+
+
+              

@@ -9,18 +9,21 @@ import UsersRoutes from "./app/routes/users.routes.js";
 import PrivateMessageRoutes from "./app/routes/private_message.routes.js";
 import FileRoutes from './app/routes/files.routes.js';
 import Socket from "./app/sockets/socket.controller.js";
+import { swaggerUi, specs } from "./swagger.js";
+import YAML from "yamljs"
 
 console.clear();
 
 dotenv.config();
 
 const app = express();
+const swaggerDoc = YAML.load('./swagger.yaml')
 app.use(cors());
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
-
+app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerDoc));
 
 app.use("/users", UsersRoutes);
 // PRIVATE MESSAGES

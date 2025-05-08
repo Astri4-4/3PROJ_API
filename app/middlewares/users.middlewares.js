@@ -29,16 +29,14 @@ function doExistWanted(req, res, next) {
     const id = req.params["id"];
 
     //TODO Voir si l'utilisateur existe par son id
-    const user = {}
-    if (user != undefined || user != null) {
+    const user = {
+        id: 1
+    }
+    if (user == undefined || user == null) {
         res.status(404).json({"message": "User not found"})
     } else {
         next()
     }
-}
-
-doEmailUsedWanted(req, res , next) {
-    const id = req.params["id"];
 }
 
 function doExistUnwanted(req, res, next) {
@@ -55,7 +53,7 @@ function isEmailUsed(req, res, next) {
     //TODO Voir si l'email est déjà utilisé par un utilisateur
     const response = false;
 
-    if (response = true) {
+    if (response == true) {
         res.status(400).json({"message": "Email already used"})
     } else {
         next();
