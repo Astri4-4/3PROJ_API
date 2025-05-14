@@ -539,7 +539,7 @@ paths:
           description: Server error
     
     delete:
-      summary: Delete a user based on it's Id from a workspace based on it's ID
+      summary: Delete a user based on it's Id from a workspace based on it's ID [NOT IMPLEMENTED]
       tags: [Workspaces users]
       parameters:
         - name: workspace_id
@@ -565,3 +565,96 @@ paths:
           description: Workspace or user not found
         500:
           description: Server error
+  
+  ## Workspace channels
+  /workspace/{workspace_id}/channel:
+    post:
+      summary: Add a channel to a workspace based on it's ID [NOT IMPLEMENTED]
+      tags: [Channels]
+      parameters:
+        - name: workspace_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Workspace ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - user
+                - name
+                - limits
+              properties:
+                user:
+                  type: integer
+                name:
+                  type: string
+                limits:
+                  type: string
+      responses:
+        200:
+          description: Channel created
+        400:
+          description: One or more information are incorrect
+        401:
+          description: Invalid token
+        404:
+          description:  Workspace not found
+        500:
+          description: Server error
+
+    get:
+      summary: Get all channel of a workspace based on it's ID [NOT IMPLEMENTED]
+      tags: [Channels]
+      parameters:
+        - name: workspace_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Workspace ID
+      responses:
+        200:
+          description: Return all channel
+        400:
+          description: One or more information are incorrect
+        401:
+          description: Invalid token
+        404:
+          description: Workspace not found
+        500:
+          description: Server error
+  
+  /workspace/{workspace_id}/channel/{channel_id}:
+    get:
+      summary: Get a channel based on it's ID from a workspace based on it's ID [NOT IMPLEMENTED]
+      tags: [Channels]
+      parameters:
+        - name: workspace_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Workspace ID
+        - name: channel_id
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: Channel ID
+      responses:
+        200:
+          description: Return a channel
+        400:
+          description: One or more information are incorrect
+        401:
+          description: Invalid token
+        404:
+          description: Workspace / Channel not found
+        500:
+          description: Server error
+
