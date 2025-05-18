@@ -8,6 +8,8 @@ import {Server} from "socket.io";
 import UsersRoutes from "./app/routes/users.routes.js";
 import PrivateMessageRoutes from "./app/routes/private_message.routes.js";
 import FileRoutes from './app/routes/files.routes.js';
+import WorkspaceRoutes from "./app/routes/workspaces.routes.js";
+
 import Socket from "./app/sockets/socket.controller.js";
 import { swaggerUi, specs } from "./swagger.js";
 import YAML from "yamljs"
@@ -30,6 +32,8 @@ app.use("/users", UsersRoutes);
 app.use("/private", PrivateMessageRoutes);
 // ATTACHMENT / PROFILE PICTURE
 app.use("/public", FileRoutes);
+
+app.use("/workspace", WorkspaceRoutes);
 
 // WEBSOCKET
 const io = new Server({
